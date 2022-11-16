@@ -5,6 +5,7 @@
         public int Id;
         public string Name;
         public char Ico;
+        public string Color;
 
         public Icon(int id, string name, char ico)
         {
