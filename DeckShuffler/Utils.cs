@@ -5,18 +5,18 @@ namespace DeckShuffler
 {
     internal static class Utils
     {
-        public static Icon[] createIcons()
+        public static Icon[] CreateIcons()
         {
             Icon[] icons = new Icon[4];
 
-            Icon spade = new Icon(1, "Spades", '♠');
-            icons[0] = spade;
-            Icon diamond = new Icon(1, "Diamonds", '♦');
-            icons[1] = diamond;
             Icon heart = new Icon(1, "Hearts", '♥');
-            icons[2] = heart;
-            Icon clover = new Icon(1, "Clovers", '♣');
-            icons[3] = clover;
+            icons[0] = heart;
+            Icon clubs = new Icon(1, "Clovers", '♣');
+            icons[1] = clubs;
+            Icon diamond = new Icon(1, "Diamonds", '♦');
+            icons[2] = diamond;
+            Icon spade = new Icon(1, "Spades", '♠');
+            icons[3] = spade;
 
             return icons;
         }
@@ -56,26 +56,59 @@ namespace DeckShuffler
         public static void AddCardsToDeck(ref Deck deck, Card[] cards)
         {
             foreach (var card in cards)
-            {
                 deck.Cards.Add(card);
-            }
         }
 
-        public static List<int> GenerateRandomOrder()
+        public static Deck CreateDeck(string deckName, int id)
+        {
+            Icon[] icons = CreateIcons();
+
+            Card[] hearts = CreateCardsForIcon(icons[0]);
+            Card[] clubs = CreateCardsForIcon(icons[1]);
+            Card[] diamonds = CreateCardsForIcon(icons[2]);
+            Card[] spades = CreateCardsForIcon(icons[3]);
+
+            Deck deck = new Deck(deckName, id);
+
+            AddCardsToDeck(ref deck, hearts);
+            AddCardsToDeck(ref deck, clubs);
+            AddCardsToDeck(ref deck, diamonds);
+            AddCardsToDeck(ref deck, spades);
+
+            return deck;
+        }
+
+        public static List<int> GenerateRandomOrder(int maxNumber)
         {
             List<int> order = new List<int>();
+
             Random rand = new Random();
-            while (order.Count < 52)
+
+            while (order.Count < maxNumber)
             {
-                int random = rand.Next(1, 53);
+                int random = rand.Next(1, maxNumber+1);
                 if (!order.Contains(random))
-                {
                     order.Add(random);
-                }
             }
 
             return order;
         }
 
+        public static Stack<Card> CreateShuffledDeck(Deck orderedDeck)
+        {
+            Stack<Card> shuffledDeck = new Stack<Card>();
+
+            List<int> numbers = GenerateRandomOrder(52);
+            foreach(var number in numbers)
+                shuffledDeck.Push(orderedDeck.Cards[number - 1]);
+
+            return shuffledDeck;
+        }
+
+        public static void ShowShuffledDeck(Stack<Card> shuffledDeck)
+        {
+            foreach(var card in shuffledDeck)
+                card.CardInfo();
+        }
     }
 }
