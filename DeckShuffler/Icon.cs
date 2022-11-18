@@ -1,6 +1,6 @@
 ﻿namespace DeckShuffler
 {
-    internal class Icon
+    public class Icon
     {
         public int Id;
         public string Name;
@@ -12,11 +12,6 @@
             Id = id;
             Name = name;
             Ico = ico;
-        }
-
-        public override string ToString()
-        {
-            return $"Icon id: {Id} \nIcon Name: {Name}";
         }
     }
 }

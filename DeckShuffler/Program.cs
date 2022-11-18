@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace DeckShuffler
 {
@@ -12,7 +9,7 @@ namespace DeckShuffler
         {
             Deck deck = Utils.CreateDeck("Blackjack", 1);
             Stack<Card> shuffledDeck = Utils.CreateShuffledDeck(deck);
-            Utils.ShowShuffledDeck(shuffledDeck);
+            //Utils.ShowShuffledDeck(shuffledDeck);
 
             Console.ReadKey();
         }

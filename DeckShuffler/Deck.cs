@@ -2,7 +2,7 @@
 
 namespace DeckShuffler
 {
-    internal class Deck
+    public class Deck
     {
         public string Name { get; set; }
         public int Id { get; set; }

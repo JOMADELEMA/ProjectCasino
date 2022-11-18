@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DeckShuffler
 {
-    internal static class Utils
+    public static class Utils
     {
         public static Icon[] CreateIcons()
         {
@@ -21,36 +21,36 @@ namespace DeckShuffler
             return icons;
         }
 
-        public static Card[] CreateCardsForIcon(Icon icon)
+        public static Card[] CreateCards(Icon icon)
         {
-            Card[] cardsForIcon = new Card[13];
+            Card[] cards = new Card[13];
             for (int i = 0; i < 13; i++)
             {
                 switch (i)
                 {
                     case 0:
                         Card ace = new Card("Ace", i + 1, icon);
-                        cardsForIcon[i] = ace;
+                        cards[i] = ace;
                         break;
                     case 10:
                         Card jack = new Card("Jack", i + 1, icon);
-                        cardsForIcon[i] = jack;
+                        cards[i] = jack;
                         break;
                     case 11:
                         Card queen = new Card("Queen", i + 1, icon);
-                        cardsForIcon[i] = queen;
+                        cards[i] = queen;
                         break;
                     case 12:
                         Card king = new Card("King", i + 1, icon);
-                        cardsForIcon[i] = king;
+                        cards[i] = king;
                         break;
                     default:
                         Card temp = new Card((i + 1).ToString(), i + 1, icon);
-                        cardsForIcon[i] = temp;
+                        cards[i] = temp;
                         break;
                 }
             }
-            return cardsForIcon;
+            return cards;
         }
 
         public static void AddCardsToDeck(ref Deck deck, Card[] cards)
@@ -62,13 +62,13 @@ namespace DeckShuffler
         public static Deck CreateDeck(string deckName, int id)
         {
             Icon[] icons = CreateIcons();
-
-            Card[] hearts = CreateCardsForIcon(icons[0]);
-            Card[] clubs = CreateCardsForIcon(icons[1]);
-            Card[] diamonds = CreateCardsForIcon(icons[2]);
-            Card[] spades = CreateCardsForIcon(icons[3]);
-
             Deck deck = new Deck(deckName, id);
+
+            Card[] hearts = CreateCards(icons[0]);
+            Card[] clubs = CreateCards(icons[1]);
+            Card[] diamonds = CreateCards(icons[2]);
+            Card[] spades = CreateCards(icons[3]);
+
 
             AddCardsToDeck(ref deck, hearts);
             AddCardsToDeck(ref deck, clubs);
@@ -93,6 +93,8 @@ namespace DeckShuffler
 
             return order;
         }
+
+        
 
         public static Stack<Card> CreateShuffledDeck(Deck orderedDeck)
         {

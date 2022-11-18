@@ -2,7 +2,7 @@
 
 namespace DeckShuffler
 {
-    internal class Card
+    public class Card
     {
         private readonly string Id;
         private readonly int Value;
@@ -16,11 +16,8 @@ namespace DeckShuffler
         }
 
         public override string ToString()=> $"Card Id: {Id}\nCard Value: {Value}\nCard Icon: {icon.Name}";
-
         public void CardInfo() => Console.WriteLine($"{Id} of {icon.Ico}");
-
         public int GetCardValue() => Value;
-
         public void PrintValue() =>  Console.WriteLine(Value);
     }
 }
